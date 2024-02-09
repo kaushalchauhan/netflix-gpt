@@ -7,6 +7,12 @@
 - Login Form
 - Form validation
 - useRef form
+- Firebase Setup
+- Deploying our app to the production
+- Create sign-up user account
+- Implement sigin user Api
+- Created our user redux store with userSlice
+-
 
 ### Features
 
