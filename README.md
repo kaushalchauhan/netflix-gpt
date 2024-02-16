@@ -12,6 +12,16 @@
 - Create sign-up user account
 - Implement sigin user Api
 - Created our user redux store with userSlice
+- Update Profile
+- Implemented Signout
+- Register for IMDB API
+- get data from tmdb now playing
+- Custom hook for now playing movies, movie-trailer
+- Create movie slice
+- update store with movie data
+- fetch data for movie trailer
+- update store with trailer video data
+- embedded the youtube video and make it autoplay-mute
 -
 
 ### Features

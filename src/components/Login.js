@@ -3,12 +3,15 @@ import Header from "./Header";
 import { checkValidData } from "../utils/validate";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { addUser } from "../utils/userSlice";
+import { LOGO, USER_AVTAR } from "../utils/constants";
 
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -16,7 +19,7 @@ const Login = () => {
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
-  const navigate = useNavigate("");
+  const dispatch = useDispatch();
 
   const handleToggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
@@ -41,11 +44,19 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/73069418?v=4",
+            photoURL: USER_AVTAR,
           })
             .then(() => {
               // Profile updated!
-              navigate("/browse");
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -66,7 +77,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -79,11 +89,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          className="w-[100%]"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/c38a2d52-138e-48a3-ab68-36787ece46b3/eeb03fc9-99c6-438e-824d-32917ce55783/IN-en-20240101-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
-          alt="bg-img"
-        />
+        <img className="w-[100%]" src={LOGO} alt="bg-img" />
       </div>
       <form className="absolute p-12 w-4/12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-md bg-opacity-80">
         <h2 className="font-bold py-4 text-3xl">
