@@ -22,6 +22,12 @@
 - fetch data for movie trailer
 - update store with trailer video data
 - embedded the youtube video and make it autoplay-mute
+- build secondary component
+- build movie list
+- build movie card
+- TMDB img CDN URL
+- add styling to browse page using tailwind CSS
+- created usePopularMovie custom hook
 -
 
 ### Features
