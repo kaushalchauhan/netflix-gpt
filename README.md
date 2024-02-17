@@ -28,7 +28,9 @@
 - TMDB img CDN URL
 - add styling to browse page using tailwind CSS
 - created usePopularMovie custom hook
-- GPT Search Feature
+- GPT Search Page
+- GPT Search Bar
+- Multi language Feature
 -
 
 ### Features
