@@ -2,9 +2,8 @@ import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { addUser } from "../utils/userSlice";
-import { LOGO, USER_AVTAR } from "../utils/constants";
+import { BG_URL, USER_AVTAR } from "../utils/constants";
 
 import {
   createUserWithEmailAndPassword,
@@ -89,7 +88,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img className="w-[100%]" src={LOGO} alt="bg-img" />
+        <img className="w-[100%]" src={BG_URL} alt="bg-img" />
       </div>
       <form className="absolute p-12 w-4/12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-md bg-opacity-80">
         <h2 className="font-bold py-4 text-3xl">

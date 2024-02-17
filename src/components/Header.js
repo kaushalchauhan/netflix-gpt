@@ -4,10 +4,13 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
-
+import { toggleGptSearchView } from "../utils/gptSlice";
+import { SUPPORTED_LANGUAGES } from "../utils/constants";
+import { changeLanguage } from "../utils/configSlice";
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
   const user = useSelector((store) => store.user);
   const handleSignout = () => {
     signOut(auth)
@@ -15,6 +18,12 @@ const Header = () => {
       .catch((error) => {
         // An error happened.
       });
+  };
+  const handleLangChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
+  const handleGPTBtn = () => {
+    dispatch(toggleGptSearchView());
   };
 
   useEffect(() => {
@@ -56,15 +65,36 @@ const Header = () => {
       </svg>
       {user && (
         <div className="flex p-2 gap-2">
+          <button
+            onClick={handleGPTBtn}
+            className="px-6 py-2 m-2 bg-blue-500 text-white rounded mr-5 my-2 hover:bg-blue-800 transition-all duration-300"
+          >
+            {showGptSearch ? "Homepage" : "GPT Search"}
+          </button>
+          {showGptSearch && (
+            <select
+              className="p-2 bg-yellow-200 text-black m-2 outline-none cursor-pointer"
+              onChange={handleLangChange}
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <option value={lang.identifier} key={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
+
+          <button
+            onClick={handleSignout}
+            className="text-white font-bold hover:text-red-500"
+          >
+            Signout
+          </button>
           <img
             className="w-12 h-12 rounded-md"
             alt="user-icon"
             src={user.photoURL}
           />
-
-          <button onClick={handleSignout} className="text-white font-bold">
-            Signout
-          </button>
         </div>
       )}
     </div>
