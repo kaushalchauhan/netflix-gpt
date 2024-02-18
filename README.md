@@ -31,7 +31,14 @@
 - GPT Search Page
 - GPT Search Bar
 - Multi language Feature
--
+- BUGFIX - toggleGptSearchView() from the store on signout
+- implemented GPT Search using openAI
+- fetch gpt movie suggestion from TMDB
+- created gptSlice added data
+- reuse movieList component to make suggestion container
+- implemented memoziation
+- .env file
+- site responsive
 
 ### Features
 
@@ -54,6 +61,10 @@
   - Search bar
   - Movies Suggestions
 
+- Multilang support for GPT search page
+
+- Add memoziation for nowPlaying,
+
   #### firebase setup
 
   - install firebase cli = `sudo npm install -g firebase-tools`
@@ -62,3 +73,9 @@
   - What do you want to use as your public directory? `build`
   - `firebase deploy`
   - link - https://netlixgpt.web.app
+
+# env var in CRA(create react app)
+
+- create .env file, add with prefix in var name, i.e - REACT_APP_OPENAI_KEY = "jfllnle"
+- add to config like export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY
+- add .env to .gitignore

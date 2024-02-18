@@ -18,6 +18,7 @@ const Header = () => {
       .catch((error) => {
         // An error happened.
       });
+    dispatch(toggleGptSearchView());
   };
   const handleLangChange = (e) => {
     dispatch(changeLanguage(e.target.value));
@@ -47,11 +48,11 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
   return (
-    <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
+    <div className="absolute w-screen md:px-8 px-3 py-2 bg-gradient-to-b from-black z-10 flex justify-between flex-col md:flex-row">
       <svg
         viewBox="0 0 111 30"
         data-uia="netflix-logo"
-        className="w-44"
+        className="w-44 mx-auto md:mx-0"
         aria-hidden="true"
         focusable="false"
       >
@@ -64,16 +65,16 @@ const Header = () => {
         </g>
       </svg>
       {user && (
-        <div className="flex p-2 gap-2">
+        <div className="flex p-2 md:gap-2 gap-1 md:justify-normal justify-between md:mt-0 mt-2">
           <button
             onClick={handleGPTBtn}
-            className="px-6 py-2 m-2 bg-blue-500 text-white rounded mr-5 my-2 hover:bg-blue-800 transition-all duration-300"
+            className="md:px-6 px-3 py-2 bg-blue-500 text-white rounded my-2 hover:bg-blue-800 transition-all duration-300"
           >
             {showGptSearch ? "Homepage" : "GPT Search"}
           </button>
           {showGptSearch && (
             <select
-              className="p-2 bg-yellow-200 text-black m-2 outline-none cursor-pointer"
+              className="md:p-2 p-1 bg-yellow-200 text-black m-2 outline-none cursor-pointer"
               onChange={handleLangChange}
             >
               {SUPPORTED_LANGUAGES.map((lang) => (
@@ -83,18 +84,19 @@ const Header = () => {
               ))}
             </select>
           )}
-
-          <button
-            onClick={handleSignout}
-            className="text-white font-bold hover:text-red-500"
-          >
-            Signout
-          </button>
-          <img
-            className="w-12 h-12 rounded-md"
-            alt="user-icon"
-            src={user.photoURL}
-          />
+          <div className="flex flex-col justify-center items-center">
+            <img
+              className="w-12 h-12 rounded-md opacity-80"
+              alt="user-icon"
+              src={user.photoURL}
+            />
+            <button
+              onClick={handleSignout}
+              className="text-white md:font-bold font-normal hover:text-red-500 relative z-10 -mt-4"
+            >
+              Signout
+            </button>
+          </div>
         </div>
       )}
     </div>
